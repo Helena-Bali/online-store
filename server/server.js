@@ -9,6 +9,8 @@ import cookieParser from 'cookie-parser'
 import config from './config'
 import Html from '../client/html'
 
+const { readFile } = require('fs').promises
+
 require('colors')
 
 let Root
@@ -33,6 +35,13 @@ const middleware = [
 ]
 
 middleware.forEach((it) => server.use(it))
+
+server.get('/api/v1/goods', async (req, res) => {
+  const readGoods = await readFile(`${__dirname}/data/goods.json`)
+    .then((f) => JSON.parse(f))
+    .catch(() => ({ message: 'There is nothing here' }))
+  res.json(readGoods)
+})
 
 server.use('/api/', (req, res) => {
   res.status(404)
