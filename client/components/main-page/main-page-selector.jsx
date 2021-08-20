@@ -9,7 +9,7 @@ import Card from './card'
             return (
                 [...acc,
                 <div key={rec.id}>
-                    <Card data={rec.title} />
+                    <Card title={rec.title} />
                 </div>]
             )
         }
