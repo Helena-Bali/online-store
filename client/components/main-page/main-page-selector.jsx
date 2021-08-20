@@ -1,7 +1,22 @@
+import React from 'react'
 import { useSelector } from 'react-redux'
+import Card from './card'
 
- const Data = () => {
- return useSelector((s) => s.mainReducer.goods)
+ const ListOfGoods = () => {
+     const fullListOfGoods = useSelector((store) => store.mainReducer.listOfGoods)
+     const reducedListOfGoods = fullListOfGoods.reduce((acc, rec, index) => {
+        if (index < 10) {
+            return (
+                [...acc,
+                <div key={rec.id}>
+                    <Card data={rec.title} />
+                </div>]
+            )
+        }
+        return acc
+    }, []
+    )
+ return reducedListOfGoods
 }
 
-export default Data
+export default ListOfGoods

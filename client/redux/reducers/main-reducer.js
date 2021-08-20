@@ -1,15 +1,17 @@
-const UPDATE_MAIN_PAGE = "UPDATE_MAIN_PAGE";
+import axios from 'axios'
+
+const GET_GOODS = "GET_GOODS";
 
 const initialState = {
-  goods: "DATA"
+  listOfGoods: []
 };
 
-const mainReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_MAIN_PAGE: {
+    case GET_GOODS: {
       return {
         ...state,
-        goods: action.goods
+        listOfGoods: action.data
       };
     }
     default:
@@ -17,9 +19,11 @@ const mainReducer = (state = initialState, action) => {
   }
 };
 
-export function updateMainPage(goods) {
-  return { type: UPDATE_MAIN_PAGE, goods };
+export function getGoods() {
+  return (dispatch) => {
+    axios('/api/v1/goods').then(({ data }) => {
+      dispatch({ type: GET_GOODS, data })
+    })
+  }
 }
 
-
-export default mainReducer;

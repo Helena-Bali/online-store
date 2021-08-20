@@ -8,11 +8,11 @@ import store, { history } from '../redux'
 import Home from '../components/home'
 import DummyView from '../components/dummy-view'
 import NotFound from '../components/404'
-import MainPage from '../components/main-page/main-page'
 import Basket from '../components/basket/basket'
 import Logs from '../components/logs/logs'
 
 import Startup from './startup'
+import MainPageContainer from '../components/main-page/main-page-container'
 
 const OnlyAnonymousRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.auth.user)
@@ -51,7 +51,7 @@ const RootComponent = (props) => {
       <RouterSelector history={history} location={props.location} context={props.context}>
         <Startup>
           <Switch>
-          <Route exact path="/" component={MainPage} />
+          <Route exact path="/" component={MainPageContainer} />
             <Route exact path="/basket" component={Basket} />
             <Route exact path="/logs" component={Logs} />
             <Route exact path="/dashboard" component={Home} />

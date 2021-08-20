@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Card = () => {
+const Card = (props) => {
     return (
         <div>
             <div className=" card max-w-xs rounded overflow-hidden shadow-lg my-2">
-                <img className="card__image" src="https://image.made-in-china.com/2f0j00hIuYSLrlZskJ/Wholesale-3D-Schoolbag-Girls-Kindergarten-Cartoon-School-Bag-for-Children.jpg" alt="Sunset in the mountains"/>
+                <img className="card__image" src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" alt="Sunset in the mountains"/>
                     <div className="px-6 py-4">
-                        <div className="card__title font-bold text-xl mb-2">Schoolbag</div>
+                        <div className="card__title font-bold text-xl mb-2">{props.title}</div>
                         <div className="flex">
                             <div className="card__price font-bold text-xl mb-2">Price: 50</div>
                             <p className=" currency font-bold text-xl mb-2 ml-2">
