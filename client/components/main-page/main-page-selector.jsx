@@ -7,16 +7,17 @@ import Card from './card'
      const reducedListOfGoods = fullListOfGoods.reduce((acc, rec, index) => {
         if (index < 10) {
             return (
-                [...acc,
-                <div key={rec.id}>
-                    <Card title={rec.title} />
-                </div>]
+                [...acc,                
+                    <div key={rec.id}className="m-2">
+                        <Card data={rec} />
+                    </div>                
+                ]
             )
         }
         return acc
     }, []
     )
- return reducedListOfGoods
+ return <div className="flex flex-wrap"> {reducedListOfGoods} </div>
 }
 
 export default ListOfGoods
