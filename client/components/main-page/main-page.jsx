@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../header/header";
-import ListOfGoods from "./main-page-selector";
+import ListOfGoods from "./list-of-goods-selector";
 
 const MainPage = () => {
     return (
