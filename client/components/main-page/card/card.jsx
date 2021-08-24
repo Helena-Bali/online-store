@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import CurrencySelector from './currency-selector'
 
 const Card = (props) => {
     const { data } = props
-    const currency = useSelector((store) => store.mainReducer.currency)
     const rate = useSelector((store) =>
      store.mainReducer.rates[store.mainReducer.currency])
     const actualPrice = data.price * rate
@@ -16,7 +16,7 @@ const Card = (props) => {
                         <div className="flex">
                             <div className="card__price font-bold text-xl mb-2">{actualPrice.toFixed(2)}</div>
                             <p className=" currency font-bold text-xl mb-2 ml-2">
-                             {currency}
+                             <CurrencySelector/>
                             </p>
                         </div>
                         <div className="card__product-amount font-bold text-xl mb-2">In basket: 1 </div>

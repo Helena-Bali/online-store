@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Card from './card'
+import Card from './card/card'
 
  const ListOfGoods = () => {
      const fullListOfGoods = useSelector((store) => store.mainReducer.listOfGoods)
