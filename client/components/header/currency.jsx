@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { setCurrency } from '../../redux/reducers/main-reducer'
+import { setCurrency } from '../../redux/reducers/header-reducer'
 
 const Currency = () => {
   const dispatch = useDispatch()

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 const ActualPriceSelector = (props) => {
     const { data } = props
     const rate = useSelector((store) =>
-        store.mainReducer.rates[store.mainReducer.currency])
+        store.headerReducer.rates[store.headerReducer.currency])
     const actualPrice = data.data.price * rate
     return (actualPrice.toFixed(2))
 

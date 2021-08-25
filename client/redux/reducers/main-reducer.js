@@ -1,12 +1,9 @@
 import axios from 'axios'
 
 const GET_GOODS = "GET_GOODS";
-const SET_CURRENCY = "SET_CURRENCY";
 
 const initialState = {
-  listOfGoods: [],
-  rates: { USD: 1 },
-  currency: 'USD'
+  listOfGoods: []
 };
 
 export default (state = initialState, action) => {
@@ -16,13 +13,6 @@ export default (state = initialState, action) => {
         ...state,
         listOfGoods: action.data
       };
-    }
-    case SET_CURRENCY: {
-      return {
-        ...state,
-        currency: action.data,
-        rates: action.rates
-      }
     }
     default:
       return state;
@@ -37,13 +27,4 @@ export function getGoods() {
   }
 }
 
-export function setCurrency(currency) {
-   return (dispatch, getState) => {
-    const state = getState
-    console.log(state)
-    axios('https://api.exchangerate.host/latest?base=USD').then(({ data }) => {
-      dispatch({ type: SET_CURRENCY, data: currency.toUpperCase(), rates: data.rates})
-    })
-  }
-}
 
