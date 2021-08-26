@@ -1,15 +1,20 @@
-const SET_GOODS = 'SET_GOODS'
+
+const ADD_TO_BASKET = 'ADD_TO_BASKET'
 
 const initialState = {
-    productMap: []
+    productMap: [],
+    totalPrice: 0,
+    count: 0
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SET_GOODS: {
+        case ADD_TO_BASKET: {
             return {
                 ...state,
-                productMap: action.data
+                productMap: [...state.productMap, action.item],
+                totalPrice: state.totalPrice + action.item.price,
+                count: state.productMap.length + 1
 
             }
         }
@@ -19,11 +24,12 @@ export default (state = initialState, action) => {
     }
 }
 
-export function setGoods() {
-    return
-    ({ 
-        type: SET_GOODS,
-        data
-         })
+export function addToBasket(item) {
+    return (dispatch) => {
+        dispatch({
+            type: ADD_TO_BASKET,
+            item
+        })
     }
-    
+}
+

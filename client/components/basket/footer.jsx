@@ -1,10 +1,17 @@
 import React from 'react'
+import CountOfGoodsSelector from './count-of-goods-selector'
+import TotalPriceSelector from './total-price-selector'
 
 const Footer = () => {
   return (
-    <footer id="total-amount"
-            className="absolute bottom-10 bg-blue-500 text-black items-center text-center h-12 w-36  font-bold shadow-lg  p-2 ml-5">
-      Total amount: 34</footer>
+    <div>
+      <footer id="total-amount"
+        className="absolute bottom-10 bg-blue-500 text-black items-center text-center h-16 w-42  font-bold shadow-lg  p-2 ml-5">
+        Product total amount: <CountOfGoodsSelector />
+        <div className="product__total_price h-12 w-42 ml-5">
+        Product total price: <TotalPriceSelector /></div>
+      </footer>
+    </div>
   )
 }
 

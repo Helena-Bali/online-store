@@ -1,10 +1,13 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import CurrencySelector from './currency-selector'
 import ActualPriceSelector from './actual-price-selector'
+import { addToBasket } from '../../../redux/reducers/basket-reducer'
 
 
 const Card = (props) => {
     const { data } = props
+    const dispatch = useDispatch()
     return (
         <div>
             <div className=" card max-w-xs rounded overflow-hidden shadow-lg my-2">
@@ -22,7 +25,10 @@ const Card = (props) => {
             </div>
             <div>
                 <button type="button"
-                    className="bg-blue-500 text-black items-center text-center h-12 w-24 border-2 rounded  font-bold shadow-lg  p-2 mr-8"
+                    className="bg-blue-500 text-black
+                     items-center text-center h-12 w-24 border-2 rounded
+                     font-bold shadow-lg  p-2 mr-8"
+                    onClick={() => dispatch(addToBasket(data))}
                 >Добавить</button>
             </div>
         </div>

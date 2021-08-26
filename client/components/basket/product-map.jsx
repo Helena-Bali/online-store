@@ -17,8 +17,7 @@ const ProductMap = () => {
                             -</button>
                     </span>
                 </div>
-                <div className="product__amount ml-5">product__amount</div>
-                <div className="product__total_price ml-5">product__total_price</div>
+                <div className="product__amount ml-5">In basket: </div>
             </div>
     )
 }
