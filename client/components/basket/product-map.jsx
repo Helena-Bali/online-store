@@ -1,4 +1,6 @@
 import React from 'react'
+import ActualPriceSelector from '../main-page/card/actual-price-selector'
+import CurrencySelector from '../main-page/card/currency-selector'
 
 const ProductMap = (props) => {
     const { data } = props
@@ -11,7 +13,7 @@ const ProductMap = (props) => {
                             alt="Products" />
                     </span>
                     <span className="product__title ml-5">{data.title}</span>
-                    <span className="product__price ml-5">{data.price}</span>
+                    <span className="product__price ml-5"><ActualPriceSelector data={props}/> <CurrencySelector/> </span>
                     <span className="ml-5">
                         <button type="button"
                             className="product__remove bg-blue-500 text-white items-center text-center font-bold shadow-lg mx-2 p-1 w-12">
