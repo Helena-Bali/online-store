@@ -1,14 +1,14 @@
 import React from 'react'
 import Header from '../header/header'
-import ProductMap from './product-map';
 import Footer from './footer';
+import ListOfProducts from './product-map-selector';
 
 
 const Basket = () => {
   return (
     <div>
       <Header />
-      <ProductMap/>
+      <ListOfProducts/>
       <Footer/>
     </div>
   )
