@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CurrencySelector from './currency-selector'
 import ActualPriceSelector from './actual-price-selector'
 import { addToBasket } from '../../../redux/reducers/basket-reducer'
@@ -8,6 +8,7 @@ import { addToBasket } from '../../../redux/reducers/basket-reducer'
 const Card = (props) => {
     const { data } = props
     const dispatch = useDispatch()
+    const products = useSelector((store) => store.basketReducer.productMap[data.id])
     return (
         <div>
             <div className=" card max-w-xs rounded overflow-hidden shadow-lg my-2">
@@ -20,7 +21,7 @@ const Card = (props) => {
                             <CurrencySelector />
                         </p>
                     </div>
-                    <div className="card__product-amount font-bold text-xl mb-2">In basket: 1 </div>
+                    <div className="card__product-amount font-bold text-xl mb-2">In basket: {typeof products === 'undefined' ? 0 : products.count} </div>
                 </div>
             </div>
             <div>
