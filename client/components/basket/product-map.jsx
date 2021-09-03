@@ -10,25 +10,28 @@ const ProductMap = (props) => {
     const productsCount = useSelector((store) => store.basketReducer.productMap[data.id].count)
     return (
         <div className="product">
-                <div>
-                    <span>
-                        <img className="product__image ml-5 max-w-xs"
+            <div>
+                <span className="flex flex-row">
+                    <span className="w-1/6">
+                        <img className="product__image ml-5 max-w-xs object-cover h-24"
                             src={data.image}
                             alt="Products" />
                     </span>
-                    <span className="product__title ml-5">{data.title}</span>
-                    <span className="product__price ml-5"><ActualPriceBasketSelector data={props} productsCount={productsCount}/> <CurrencySelector/> </span>
-                    <span className="ml-5">
+                    <span className="ml-2 w-1/6">
                         <button type="button"
-                            className="product__remove bg-blue-500
-                             text-white items-center text-center
-                              font-bold shadow-lg mx-2 p-1 w-12"
-                              onClick={() => dispatch(deleteFromBasket())}>
+                            className="product__remove
+                             text-black items-center text-center
+                              font-bold shadow-lg border-2 border-gray-200 mx-2 p-1 w-12"
+                            onClick={() => dispatch(deleteFromBasket())}>
                             -</button>
                     </span>
-                </div>
-                <div className="product__amount ml-5">In basket: {productsCount} </div>
+                    <span className="product__price ml-3 font-bold w-1/6"><ActualPriceBasketSelector data={props} productsCount={productsCount} /> <CurrencySelector /> </span>
+                </span>
+                <div className="product__title ml-5">{data.title}</div>
             </div>
+            <span className="ml-5">In basket:</span>
+            <span className="product__amount font-bold ml-5">{productsCount} </span>
+        </div>
     )
 }
 
