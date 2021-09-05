@@ -1,6 +1,7 @@
 
 const ADD_TO_BASKET = 'ADD_TO_BASKET'
-const DELETE_FROM_BASKET = 'DELETE_FROM_BASKET'
+const UPDATE_COUNT_OF_GOODS = 'UPDATE_COUNT_OF_GOODS'
+// const DELETE_GOODS = 'DELETE_GOODS'
 
 const initialState = {
     productMap: [],
@@ -14,24 +15,21 @@ const setCount = (productMap) => {
         return count
     }
     return 1
-} 
+}
 
 const sumOfItems = (productMap) => {
     if (typeof productMap !== 'undefined') {
         return Object.keys(productMap).reduce((acc, rec) => {
-            return acc + productMap[rec].count}, 0 )
+            return acc + productMap[rec].count
+        }, 0)
     }
     return 0
-}   
+}
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_TO_BASKET: {
             return {
-                // ...state,
-                // productMap: [...state.productMap, action.item],
-                // totalPrice: state.totalPrice + action.item.price,
-                // count: state.productMap.length + 1
                 ...state,
                 productMap: {
                     ...state.productMap,
@@ -45,12 +43,30 @@ export default (state = initialState, action) => {
             }
         }
 
-        case DELETE_FROM_BASKET: {
+        case UPDATE_COUNT_OF_GOODS: {
+            const newAmount = state.productMap[action.id].count + action.payload
+            const updatedMap = Object.keys(state.productMap).reduce((acc, rec) => {
+                if (rec !== action.id) {
+                    return { ...acc, [rec]: state.productMap[rec] }
+                }
+                return { ...acc }
+            }, {})
+            if (newAmount > 0) {
+                return {
+                    ...state,
+                    productMap: {
+                        ...state.productMap,
+                        [action.id]: {
+                            ...state.productMap[action.id],
+                            count: newAmount
+                        }
+                    }
+                }
+            }
+
             return {
                 ...state,
-                productMap: [...state.productMap.filter((it, index) => {
-                    return it.index === index
-                })]
+                productMap: updatedMap
             }
         }
 
@@ -68,10 +84,17 @@ export function addToBasket(item) {
     }
 }
 
-export function deleteFromBasket() {
-    return (dispatch) => {
-        dispatch({
-            type: DELETE_FROM_BASKET
-        })
+export function updateCountOfGoods(id, change) {
+    let payload = 0
+    if (change === "+") {
+        payload = 1
     }
+    if (change === "-") {
+        payload = -1
+    }
+    return ({
+        type: UPDATE_COUNT_OF_GOODS,
+        id,
+        payload
+    })
 }

@@ -4,7 +4,8 @@ import ProductMap from './product-map'
 
  const ListOfProducts = () => {
     const products = useSelector((store) => store.basketReducer.productMap)
-    const listOfProducts = Object.values(products).map(it => {
+    const productsArray = Object.values(products)
+    const listOfProducts = productsArray.map(it => {
         return <div key={it.id}className="m-2">
                         <ProductMap data={it} />
                     </div>
