@@ -1,7 +1,6 @@
 
 const ADD_TO_BASKET = 'ADD_TO_BASKET'
 const UPDATE_COUNT_OF_GOODS = 'UPDATE_COUNT_OF_GOODS'
-// const DELETE_GOODS = 'DELETE_GOODS'
 
 const initialState = {
     productMap: [],
@@ -51,7 +50,7 @@ export default (state = initialState, action) => {
                 }
                 return { ...acc }
             }, {})
-            if (newAmount > 0) {
+            if (newAmount > 0 && action.payload === 1) {
                 return {
                     ...state,
                     productMap: {
@@ -60,13 +59,32 @@ export default (state = initialState, action) => {
                             ...state.productMap[action.id],
                             count: newAmount
                         }
-                    }
+                    },
+                    totalPrice: state.totalPrice + state.productMap[action.id].price,
+                    count: sumOfItems(state.productMap) + 1
+                }
+            }
+
+            if (newAmount > 0 && action.payload === - 1) {
+                return {
+                    ...state,
+                    productMap: {
+                        ...state.productMap,
+                        [action.id]: {
+                            ...state.productMap[action.id],
+                            count: newAmount
+                        }
+                    },
+                    totalPrice: state.totalPrice - state.productMap[action.id].price,
+                    count: sumOfItems(state.productMap) - 1
                 }
             }
 
             return {
                 ...state,
-                productMap: updatedMap
+                productMap: updatedMap,
+                totalPrice: state.totalPrice - state.productMap[action.id].price,
+                count: sumOfItems(state.productMap) - 1
             }
         }
 
