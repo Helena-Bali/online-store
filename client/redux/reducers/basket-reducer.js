@@ -43,48 +43,47 @@ export default (state = initialState, action) => {
         }
 
         case UPDATE_COUNT_OF_GOODS: {
-            const newAmount = state.productMap[action.id].count + action.payload
-            const updatedMap = Object.keys(state.productMap).reduce((acc, rec) => {
+            const stateProductMap = state.productMap
+            const copiedTotalPrice = state.totalPrice
+            const copiedIdPrice = stateProductMap[action.id].price
+            const newAmount = stateProductMap[action.id].count + action.payload
+            const updatedMap = Object.keys(stateProductMap).reduce((acc, rec) => {
                 if (rec !== action.id) {
-                    return { ...acc, [rec]: state.productMap[rec] }
+                    return { ...acc, [rec]: stateProductMap[rec] }
                 }
                 return { ...acc }
             }, {})
+            const copiedProductMap = {
+                ...stateProductMap,
+                [action.id]: {
+                    ...stateProductMap[action.id],
+                    count: newAmount
+                }
+            }
+
             if (newAmount > 0 && action.payload === 1) {
                 return {
                     ...state,
-                    productMap: {
-                        ...state.productMap,
-                        [action.id]: {
-                            ...state.productMap[action.id],
-                            count: newAmount
-                        }
-                    },
-                    totalPrice: state.totalPrice + state.productMap[action.id].price,
-                    count: sumOfItems(state.productMap) + 1
+                    productMap: copiedProductMap,
+                    totalPrice: copiedTotalPrice + copiedIdPrice,
+                    count: sumOfItems(stateProductMap) + 1
                 }
             }
 
             if (newAmount > 0 && action.payload === - 1) {
                 return {
                     ...state,
-                    productMap: {
-                        ...state.productMap,
-                        [action.id]: {
-                            ...state.productMap[action.id],
-                            count: newAmount
-                        }
-                    },
-                    totalPrice: state.totalPrice - state.productMap[action.id].price,
-                    count: sumOfItems(state.productMap) - 1
+                    productMap: copiedProductMap,
+                    totalPrice: copiedTotalPrice - copiedIdPrice,
+                    count: sumOfItems(stateProductMap) - 1
                 }
             }
 
             return {
                 ...state,
                 productMap: updatedMap,
-                totalPrice: state.totalPrice - state.productMap[action.id].price,
-                count: sumOfItems(state.productMap) - 1
+                totalPrice: copiedTotalPrice - copiedIdPrice,
+                count: sumOfItems(stateProductMap) - 1
             }
         }
 

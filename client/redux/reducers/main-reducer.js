@@ -1,9 +1,12 @@
 import axios from 'axios'
 
 const GET_GOODS = "GET_GOODS";
+const SORT_GOODS_BY_ABC = "SORT_GOODS_BY_ABC"
+const SORT_GOODS_BY_PRICE = "SORT_GOODS_BY_PRICE"
 
 const initialState = {
-  listOfGoods: []
+  listOfGoods: [],
+  sortType: ''
 };
 
 export default (state = initialState, action) => {
@@ -13,6 +16,48 @@ export default (state = initialState, action) => {
         ...state,
         listOfGoods: action.data
       };
+    }
+    case SORT_GOODS_BY_ABC: {
+      const sortedList = [...state.listOfGoods].sort((a, b) => {
+        if (a.price < b.price) {
+          return -1
+        }
+        if (a.price > b.price) {
+          return 1
+        }
+        return 0
+      })
+      if (action.sortType === true) {
+        return {
+          ...state,
+          listOfGoods: sortedList.reverse()
+        }
+      }
+      return {
+        ...state,
+        listOfGoods: sortedList
+      }
+    }
+    case SORT_GOODS_BY_PRICE: {
+      const sortedList = [...state.listOfGoods].sort((a, b) => {
+        if (a.price < b.price) {
+          return -1
+        }
+        if (a.price > b.price) {
+          return 1
+        }
+        return 0
+      })
+      if (action.sortType === true) {
+        return {
+          ...state,
+          listOfGoods: sortedList.reverse()
+        }
+      }
+      return {
+        ...state,
+        listOfGoods: sortedList
+      }
     }
     default:
       return state;
@@ -27,4 +72,16 @@ export function getGoods() {
   }
 }
 
+export function sortGoodsByABC(sortType) {
+  return ({
+    type: SORT_GOODS_BY_ABC,
+    sortType,
+  })
+}
 
+export function sortGoodsByPrice(sortType) {
+  return ({
+    type: SORT_GOODS_BY_PRICE,
+    sortType,
+  })
+}
