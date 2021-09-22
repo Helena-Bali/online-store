@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
+import { sortGoodsByABCBasket, sortGoodsByPriceBasket } from '../../redux/reducers/basket-reducer'
 import { sortGoodsByABC, sortGoodsByPrice } from '../../redux/reducers/main-reducer'
 
 const Sort = () => {
@@ -11,11 +12,13 @@ const Sort = () => {
         setToggled(!toggled)
         setSortMethodABC(toggled ? '▲' : '▼')
         dispatch(sortGoodsByABC(toggled))
+        dispatch(sortGoodsByABCBasket(toggled))
     }
     const onClickPrice = () => {
         setToggled(!toggled)
         setSortMethodPrice(toggled ? '▲' : '▼')
         dispatch(sortGoodsByPrice(toggled))
+        dispatch(sortGoodsByPriceBasket(toggled))
     }
     return (
         <span className="space-between p-10">

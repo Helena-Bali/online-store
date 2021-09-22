@@ -19,10 +19,10 @@ export default (state = initialState, action) => {
     }
     case SORT_GOODS_BY_ABC: {
       const sortedList = [...state.listOfGoods].sort((a, b) => {
-        if (a.price < b.price) {
+        if (a.title < b.title) {
           return -1
         }
-        if (a.price > b.price) {
+        if (a.title > b.title) {
           return 1
         }
         return 0
