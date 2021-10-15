@@ -4,6 +4,7 @@ import auth from './auth'
 import mainReducer from './main-reducer'
 import headerReducer from './header-reducer'
 import basketReducer from './basket-reducer'
+import logsReducer from './logs-reducer'
 
 const createRootReducer = (history) =>
   combineReducers({
@@ -11,7 +12,8 @@ const createRootReducer = (history) =>
     auth,
     mainReducer,
     headerReducer,
-    basketReducer
+    basketReducer,
+    logsReducer
   })
 
 export default createRootReducer

@@ -24,13 +24,13 @@ const ProductMap = (props) => {
                             className="product__remove
                              text-black items-center text-center
                               font-bold shadow-lg border-2 border-gray-200 mx-2 p-1 w-12"
-                            onClick={() => dispatch(updateCountOfGoods(cartItems[data.id].id, "-"))}>
+                            onClick={() => dispatch(updateCountOfGoods(cartItems[data.id].id, cartItems[data.id].title,"-"))}>
                             -</button>
                         <button type="button"
                             className="product__remove
                              text-black items-center text-center
                               font-bold shadow-lg border-2 border-gray-200 mx-2 p-1 w-12"
-                            onClick={() => dispatch(updateCountOfGoods(cartItems[data.id].id, "+"))}>
+                            onClick={() => dispatch(updateCountOfGoods(cartItems[data.id].id, cartItems[data.id].title, "+"))}>
                             +</button>
                     </span>
                     <span className="product__price ml-3 font-bold w-1/6"><ActualPriceBasketSelector data={props} productsCount={productsCount} /> <CurrencySelector /> </span>

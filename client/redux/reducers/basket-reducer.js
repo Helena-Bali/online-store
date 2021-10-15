@@ -1,3 +1,4 @@
+import axios from 'axios'
 
 const ADD_TO_BASKET = 'ADD_TO_BASKET'
 const UPDATE_COUNT_OF_GOODS = 'UPDATE_COUNT_OF_GOODS'
@@ -151,6 +152,14 @@ export default (state = initialState, action) => {
 }
 
 export function addToBasket(item) {
+  axios({
+    method: 'post',
+    url: 'api/v1/logs',
+    data: {
+      time: +new Date(),
+      action: `add ${item.title} to the basket`
+    }
+  }).catch((err) => console.log(err))
     return (dispatch) => {
         dispatch({
             type: ADD_TO_BASKET,
@@ -159,22 +168,46 @@ export function addToBasket(item) {
     }
 }
 
-export function updateCountOfGoods(id, change) {
+export function updateCountOfGoods(id, title, change) {
     let payload = 0
     if (change === "+") {
         payload = 1
+        axios({
+          method: 'post',
+          url: 'api/v1/logs',
+          data: {
+            time: +new Date(),
+            action: `add ${title} to the basket`
+          }
+        }).catch((err) => console.log(err))
     }
     if (change === "-") {
         payload = -1
+        axios({
+          method: 'post',
+          url: 'api/v1/logs',
+          data: {
+            time: +new Date(),
+            action: `remove ${title} from the basket`
+          }
+        }).catch((err) => console.log(err))
     }
-    return ({
+    return  {
         type: UPDATE_COUNT_OF_GOODS,
         id,
         payload
-    })
+    }
 }
 
 export function sortGoodsByABCBasket(sortType) {
+    axios({
+        method: 'post',
+        url: 'api/v1/logs',
+        data: {
+          time: +new Date(),
+          action: `sort goods by ABC`
+        }
+      }).catch((err) => console.log(err))
     return ({
       type: SORT_GOODS_BY_ABC,
       sortType,
@@ -182,6 +215,14 @@ export function sortGoodsByABCBasket(sortType) {
   }
   
   export function sortGoodsByPriceBasket(sortType) {
+      axios({
+          method: 'post',
+          url: 'api/v1/logs',
+          data: {
+            time: +new Date(),
+            action: `sort goods by price`
+          }
+        }).catch((err) => console.log(err))
     return ({
       type: SORT_GOODS_BY_PRICE,
       sortType,
